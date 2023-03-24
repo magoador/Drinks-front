@@ -76,6 +76,11 @@ export const authorization = createAsyncThunk(
   }
 );
 
+export const logOut = createAsyncThunk("logOut/users", async (_, thunkAPI) => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("loggedUser");
+});
+
 export const userSlice = createSlice({
   name: "users",
   initialState,
@@ -99,6 +104,10 @@ export const userSlice = createSlice({
         );
         state.token = action.payload.token;
         state.loggedUser = action.payload.loggedUser;
+      })
+      .addCase(logOut.fulfilled, (state) => {
+        state.token = "";
+        state.loggedUser = "";
       });
   },
 });

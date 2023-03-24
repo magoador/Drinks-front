@@ -7,8 +7,11 @@ import insta from "../../assets/img/insta.png";
 import whatsapp from "../../assets/img/whatsapp.png";
 import telegram from "../../assets/img/telegram.png";
 import mail from "../../assets/img/mail.png";
+import { useSelector } from "react-redux";
 
 export default function Header() {
+  const token = useSelector((state) => state.users.token);
+
   return (
     <>
       <div className={styles.header}>
@@ -45,11 +48,19 @@ export default function Header() {
           <img className={styles.telegram} src={telegram} alt="" />
           <img className={styles.mail} src={mail} alt="" />
           <div className={styles.telefon}>+7(988) 908-88-45</div>
-          <div className={styles.butimg}>
-            <Link to={"/authorization"}>
-              <button className={styles.vhod}>Войти</button>
-            </Link>
-          </div>
+          {token ? (
+            <div className={styles.butimg}>
+              <Link to={"/personalarea"}>
+                <button className={styles.vhod}>Мой кабинет</button>
+              </Link>
+            </div>
+          ) : (
+            <div className={styles.butimg}>
+              <Link to={"/authorization"}>
+                <button className={styles.vhod}>Войти</button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </>
