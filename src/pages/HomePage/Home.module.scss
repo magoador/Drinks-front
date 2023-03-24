@@ -241,3 +241,18 @@ h3 {
   font-size: 22px !important;
   font-family: cursive !important;
 }
+
+.divOpisanieNapitki {
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 15px;
+  h2 {
+      font-size: 32px;
+      font-family: cursive;
+  }
+  div {
+      font-family: cursive;
+  }
+}
