@@ -29,10 +29,10 @@ function Home() {
     <div>
       <h1 className={styles.textMenu}>Burger Menu</h1>
       <div className={styles.divCointener}>
-        {products.map((item) => {
+        {products.map((item, index) => {
           if (item.category.name === "Бургеры")
             return (
-              <div className={styles.divCointenerCard}>
+              <div className={styles.divCointenerCard} key={index}>
                 <div>
                   <img
                     className={styles.img}
@@ -63,10 +63,10 @@ function Home() {
             );
         })}
         <div className={styles.divCointenerKombo}>
-          {products.map((item) => {
+          {products.map((item, index) => {
             if (item.category.name === "Комбо") {
               return (
-                <div className={styles.hover_text_one}>
+                <div className={styles.hover_text_one} key={index}>
                   <figure className={styles.effect_text_three}>
                     <img
                       className={styles.imgKombo}
@@ -75,7 +75,7 @@ function Home() {
                     />
                     <figcaption>
                       <h3>
-                        {item.name} <h4>{item.price}₽</h4>
+                        {item.name} <br />{item.price}₽
                       </h3>
                       <p className={styles.expo}>{item.expo}</p>
                       <p>
