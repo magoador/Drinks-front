@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProduct } from "../../redux/slices/productSlice";
 import { fetchUsers } from "../../redux/slices/userSlice";
 import { addProductToCart, fetchCart } from "../../redux/slices/cartSlice";
-import Napitki from "./Napitki";
 
-function Home() {
+function Napitki() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
   const loggedUser = useSelector((state) => state.users.loggedUser?.id);
@@ -28,10 +27,10 @@ function Home() {
 
   return (
     <div>
-      <h1 className={styles.textMenu}>Burger Menu</h1>
+      <h1 className={styles.textMenu}>Напитки</h1>
       <div className={styles.divCointener}>
         {products.map((item) => {
-          if (item.category.name === "Бургеры")
+          if (item.category.name === "Напитки")
             return (
               <div className={styles.divCointenerCard}>
                 <div>
@@ -41,12 +40,10 @@ function Home() {
                     alt=""
                   />
                 </div>
-                <div className={styles.divOpisanie}>
+                <div className={styles.divOpisanieNapitki}>
                   <div>
                     <h1>{item.name}</h1>
                   </div>
-                  <div>{item.expo}</div>
-                  <div>{item.weight}гр.</div>
                   <div className={styles.divPriceAndBtn}>
                     <h2>{item.price}₽</h2>
                     {userCart?.items?.find(
@@ -63,38 +60,9 @@ function Home() {
               </div>
             );
         })}
-        <div className={styles.divCointenerKombo}>
-          {products.map((item) => {
-            if (item.category.name === "Комбо") {
-              return (
-                <div className={styles.hover_text_one}>
-                  <figure className={styles.effect_text_three}>
-                    <img
-                      className={styles.imgKombo}
-                      src={`http://localhost:4000/${item.image}`}
-                      alt=""
-                    />
-                    <figcaption>
-                      <h3>
-                        {item.name} <h4>{item.price}₽</h4>
-                      </h3>
-                      <p className={styles.expo}>{item.expo}</p>
-                      <p>
-                        <button className={styles.btn}>
-                          Добавить в корзину
-                        </button>
-                      </p>
-                    </figcaption>
-                  </figure>
-                </div>
-              );
-            }
-          })}
-        </div>
       </div>
-      <Napitki />
     </div>
   );
 }
 
-export default Home;
+export default Napitki;
