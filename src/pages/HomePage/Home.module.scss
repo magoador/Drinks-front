@@ -243,3 +243,18 @@ figure.effect_text_three:hover p {
 h4 {
     font-family: cursive;
 }
+
+.divOpisanieNapitki {
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 15px;
+  h2 {
+      font-size: 32px;
+      font-family: cursive;
+  }
+  div {
+      font-family: cursive;
+  }
+}
