@@ -1,10 +1,13 @@
-import styles from "./Home.module.scss";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import styles from "./Home.module.scss";
 import { fetchProduct } from "../../redux/slices/productSlice";
 import { fetchUsers } from "../../redux/slices/userSlice";
 import { addProductToCart, fetchCart } from "../../redux/slices/cartSlice";
 import Napitki from "./Napitki";
+import bag_icon from "../../assets/img/bag_icon.png";
+import { Link } from "react-router-dom";
 
 function Home() {
   const dispatch = useDispatch();
@@ -27,7 +30,22 @@ function Home() {
   };
 
   return (
-    <div>
+    <div className={styles.home}>
+      {userCart?.items.length && (
+        <Link to={`/cart/${loggedUser}`}>
+          <div className={styles.cart_link}>
+            <div className={styles.cart_totalPrice}>
+              = {userCart?.totalPrice}₽
+            </div>
+            <div className={styles.cart_img}>
+              <img width={50} src={bag_icon} alt="" />
+            </div>
+            <div className={styles.cart_itemsCount}>
+              {userCart?.items.length}
+            </div>
+          </div>
+        </Link>
+      )}
       <h1 className={styles.textMenu}>Burger Menu</h1>
       <div className={styles.divCointener}>
         {products.map((item, index) => {
@@ -76,7 +94,8 @@ function Home() {
                     />
                     <figcaption>
                       <h3>
-                        {item.name} <br />{item.price}₽
+                        {item.name} <br />
+                        {item.price}₽
                       </h3>
                       <p className={styles.expo}>{item.expo}</p>
                       <p>

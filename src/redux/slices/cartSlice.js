@@ -161,6 +161,7 @@ export const cartSlice = createSlice({
         state.cart.items.push(
           action.payload.items[action.payload.items.length - 1]
         );
+        state.cart.totalPrice = action.payload.totalPrice;
       });
   },
 });
