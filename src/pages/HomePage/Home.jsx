@@ -99,9 +99,18 @@ function Home() {
                       </h3>
                       <p className={styles.expo}>{item.expo}</p>
                       <p>
-                        <button className={styles.btn}>
-                          Добавить в корзину
-                        </button>
+                        {userCart?.items?.find(
+                          (items) => items.item._id === item._id
+                        ) ? (
+                          <button className={styles.btn}>В корзине</button>
+                        ) : (
+                          <button
+                            className={styles.btn}
+                            onClick={() => handleAddProductToCart(item._id)}
+                          >
+                            Добавить в корзину
+                          </button>
+                        )}
                       </p>
                     </figcaption>
                   </figure>
