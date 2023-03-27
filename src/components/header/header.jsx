@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import styles from "./Header.module.scss";
@@ -11,7 +11,14 @@ import { useSelector } from "react-redux";
 
 export default function Header() {
   const token = useSelector((state) => state.users.token);
+  const [menu, setMenu] = useState(false)
 
+const handleMenu = () => {
+  setMenu(!menu)
+}
+const scroller = (px) => {
+  window.scrollTo(0, px)
+}
   return (
     <>
       <div className={styles.header}>
@@ -22,9 +29,15 @@ export default function Header() {
             </a>
           </div>
           <div className={styles.menu}>
-            <a className={styles.menu_href} href="">
+            <div onClick={handleMenu} className={styles.divTextMenu} href="">
               Меню
-            </a>
+            </div>
+              {menu && <div className={styles.divMenu}>
+              <h3 className={styles.textMenu} onClick={() => scroller(0)}>Бургеры</h3>
+              <h3 className={styles.textMenu} onClick={() => scroller(1900)}>Напитки</h3>
+              <h3 className={styles.textMenu} onClick={() => scroller(4340)}>Картофельи Курица</h3>
+              <h3 className={styles.textMenu} onClick={() => scroller(5150)}>Соусы</h3>
+              </div>}
           </div>
           <div className={styles.dostavka}>
             <Link className={styles.dostavka_href} to={"/delivery"}>

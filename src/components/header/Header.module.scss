@@ -82,6 +82,27 @@
   position: absolute;
 }
 
-/* .butimg .vhod:hover .login{
-left: 0;
-} */
+.divMenu {
+  position: absolute;
+    bottom: 360px;
+    right: 65%;
+    background: blanchedalmond;
+    width: 400px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 1%;
+    border: 2px solid black;
+    color: #ff9800;
+    border-radius: 5px;
+}
+
+.divTextMenu {
+  cursor: pointer;
+  color: white;
+}
+
+.textMenu {
+  cursor: pointer;
+}

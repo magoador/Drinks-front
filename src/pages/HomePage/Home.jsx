@@ -8,6 +8,8 @@ import { addProductToCart, fetchCart } from "../../redux/slices/cartSlice";
 import Napitki from "./Napitki";
 import bag_icon from "../../assets/img/bag_icon.png";
 import { Link } from "react-router-dom";
+import Sous from "./Sous";
+import Kartoshka from "./Kartoshka";
 
 function Home() {
   const dispatch = useDispatch();
@@ -127,6 +129,8 @@ function Home() {
         </div>
       </div>
       <Napitki handleAddProductToCart={handleAddProductToCart} />
+      <Kartoshka handleAddProductToCart={handleAddProductToCart} />
+      <Sous handleAddProductToCart={handleAddProductToCart} />
     </div>
   );
 }
