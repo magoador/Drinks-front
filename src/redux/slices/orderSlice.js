@@ -49,7 +49,7 @@ export const ordersSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchOrders.fulfilled, (state, action) => {
-        state.orders = action.payload;
+        state.orders = action.payload.reverse();
       })
       .addCase(addOrder.fulfilled, (state, action) => {
         state.orders.push(action.payload);
