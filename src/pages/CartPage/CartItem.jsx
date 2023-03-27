@@ -14,12 +14,12 @@ const CartItem = ({
 
   const handleMinus = () => {
     setCount(count - 1);
-    setTotalPrice(totalPrice - price * count);
+    setTotalPrice(totalPrice - price);
   };
 
   const handlePlus = () => {
     setCount(count + 1);
-    setTotalPrice(totalPrice + price * count);
+    setTotalPrice(totalPrice + price);
   };
 
   return (
