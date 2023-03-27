@@ -27,9 +27,9 @@ export default function Header() {
             </a>
           </div>
           <div className={styles.dostavka}>
-            <a className={styles.dostavka_href} href="">
+            <Link className={styles.dostavka_href} to={"/delivery"}>
               Доставка
-            </a>
+            </Link>
           </div>
           <div className={styles.o_nas}>
             <a className={styles.o_nas_href} href="">

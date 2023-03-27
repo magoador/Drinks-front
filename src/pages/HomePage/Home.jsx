@@ -28,7 +28,6 @@ function Home() {
 
   const handleAddProductToCart = (item, price) => {
     setTotalPrice(totalPrice + price);
-    console.log(totalPrice);
     dispatch(addProductToCart({ item, id: userCart?._id }));
   };
 

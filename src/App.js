@@ -8,6 +8,7 @@ import Cart from "./pages/CartPage/Cart";
 import Registration from "./pages/RegistrationPage/Registration";
 import Header from "./components/Header/Header";
 import PersonalArea from "./pages/PersonalAreaPage/PersonalArea";
+import Delivery from "./pages/DeliveryPage/Delivery";
 
 function App() {
   const token = useSelector((state) => state.users.token);
@@ -18,6 +19,7 @@ function App() {
       {token ? (
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/delivery" element={<Delivery />} />
           <Route path="/cart/:id" element={<Cart />} />
           <Route path="/personalArea" element={<PersonalArea />} />
           <Route path="/registration" element={<Navigate to={"/"} />} />
@@ -26,7 +28,11 @@ function App() {
       ) : (
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/personalArea" element={<Navigate to={'/authorization'} />} />
+          <Route path="/delivery" element={<Delivery />} />
+          <Route
+            path="/personalArea"
+            element={<Navigate to={"/authorization"} />}
+          />
           <Route path="/registration" element={<Registration />} />
           <Route path="/authorization" element={<Authorization />} />
         </Routes>
