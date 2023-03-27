@@ -6,7 +6,7 @@ import Home from "./pages/HomePage/Home";
 import Authorization from "./pages/Authorization/Authorizaation";
 import Cart from "./pages/CartPage/Cart";
 import Registration from "./pages/RegistrationPage/Registration";
-import Header from "./components/Header/Header";
+import Header from "./components/header/Header";
 import PersonalArea from "./pages/PersonalAreaPage/PersonalArea";
 
 function App() {
