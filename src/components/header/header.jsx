@@ -11,14 +11,30 @@ import { useSelector } from "react-redux";
 
 export default function Header() {
   const token = useSelector((state) => state.users.token);
-  const [menu, setMenu] = useState(false)
+  const [menu, setMenu] = useState(false);
 
-const handleMenu = () => {
-  setMenu(!menu)
-}
-const scroller = (px) => {
-  window.scrollTo(0, px)
-}
+  const handleMenu = () => {
+    setMenu(!menu);
+  };
+  const scroller = (px) => {
+    window.scrollTo(0, px);
+  };
+
+  const menuRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !event.composedPath().includes(menuRef.current)) {
+        setMenu(false);
+      }
+    };
+
+    document.body.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.body.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
   return (
     <>
       <div className={styles.header}>
@@ -29,15 +45,30 @@ const scroller = (px) => {
             </a>
           </div>
           <div className={styles.menu}>
-            <div onClick={handleMenu} className={styles.divTextMenu} href="">
+            <div
+              onClick={handleMenu}
+              className={styles.divTextMenu}
+              ref={menuRef}
+            >
               Меню
             </div>
-              {menu && <div className={styles.divMenu}>
-              <h3 className={styles.textMenu} onClick={() => scroller(0)}>Бургеры</h3>
-              <h3 className={styles.textMenu} onClick={() => scroller(1900)}>Напитки</h3>
-              <h3 className={styles.textMenu} onClick={() => scroller(4340)}>Картофель и Курица</h3>
-              <h3 className={styles.textMenu} onClick={() => scroller(5150)}>Соусы</h3>
-              </div>}
+
+            {menu && (
+              <div className={styles.divMenu}>
+                <h3 className={styles.textMenu} onClick={() => scroller(0)}>
+                  Бургеры
+                </h3>
+                <h3 className={styles.textMenu} onClick={() => scroller(1900)}>
+                  Напитки
+                </h3>
+                <h3 className={styles.textMenu} onClick={() => scroller(4340)}>
+                  Картофель и Курица
+                </h3>
+                <h3 className={styles.textMenu} onClick={() => scroller(5150)}>
+                  Соусы
+                </h3>
+              </div>
+            )}
           </div>
           <div className={styles.dostavka}>
             <Link className={styles.dostavka_href} to={"/delivery"}>
