@@ -9,6 +9,7 @@ import Registration from "./pages/RegistrationPage/Registration";
 import Header from "./components/header/Header";
 import PersonalArea from "./pages/PersonalAreaPage/PersonalArea";
 import Delivery from "./pages/DeliveryPage/Delivery";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const token = useSelector((state) => state.users.token);
@@ -37,6 +38,7 @@ function App() {
           <Route path="/authorization" element={<Authorization />} />
         </Routes>
       )}
+      <Footer />
     </div>
   );
 }

@@ -58,13 +58,13 @@ export default function Header() {
                 <h3 className={styles.textMenu} onClick={() => scroller(0)}>
                   Бургеры
                 </h3>
-                <h3 className={styles.textMenu} onClick={() => scroller(1900)}>
+                <h3 className={styles.textMenu} onClick={() => scroller(1780)}>
                   Напитки
                 </h3>
-                <h3 className={styles.textMenu} onClick={() => scroller(4340)}>
+                <h3 className={styles.textMenu} onClick={() => scroller(4220)}>
                   Картофель и Курица
                 </h3>
-                <h3 className={styles.textMenu} onClick={() => scroller(5150)}>
+                <h3 className={styles.textMenu} onClick={() => scroller(5030)}>
                   Соусы
                 </h3>
               </div>
