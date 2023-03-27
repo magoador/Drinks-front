@@ -1,0 +1,75 @@
+@import url("../../fonts/Parsi/style.css");
+
+.footerLogo a {
+  font-family: "Parsi";
+  font-size: 120px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-around;
+  background-color: rgb(216, 159, 52);
+  align-items: center;
+  width: 100%;
+}
+
+.divadres {
+  font-size: 20px;
+  display: flex;
+  height: 70px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.vkladki {
+  display: grid;
+  font-size: 18px;
+  width: 20%;
+  a {
+    margin-bottom: 5px;
+  }
+}
+
+.location {
+  width: 20px;
+  height: 20px;
+}
+
+.loc {
+  width: 20px;
+  height: 20px;
+}
+
+.esemb {
+  display: flex;
+}
+
+.kabard {
+  display: flex;
+}
+
+.seti {
+  display: flex;
+  justify-content: space-evenly;
+  width: 50%;
+  margin: auto;
+}
+.inst {
+  height: 30px;
+  width: 30px;
+}
+
+.whatsapp {
+  height: 30px;
+  width: 30px;
+}
+
+.telegram {
+  height: 30px;
+  width: 30px;
+}
+
+.mail {
+  height: 30px;
+  width: 30px;
+}
