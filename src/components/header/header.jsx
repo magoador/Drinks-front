@@ -52,6 +52,7 @@ export default function Header() {
             >
               Меню
             </div>
+
             {menu && (
               <div className={styles.divMenu}>
                 <h3 className={styles.textMenu} onClick={() => scroller(0)}>
