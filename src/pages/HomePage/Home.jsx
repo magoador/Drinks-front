@@ -30,13 +30,12 @@ function Home() {
 
   const handleAddProductToCart = (item, price) => {
     setTotalPrice(totalPrice + price);
-    console.log(totalPrice);
     dispatch(addProductToCart({ item, id: userCart?._id }));
   };
 
   return (
     <div className={styles.home}>
-      {userCart?.items?.length && (
+      {userCart?.items?.length > 0 && (
         <Link to={`/cart/${loggedUser}`}>
           <div className={styles.cart_link}>
             <div className={styles.cart_totalPrice}>
