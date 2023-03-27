@@ -12,6 +12,7 @@ import { addOrder, fetchOrders } from "../../redux/slices/orderSlice";
 import { fetchUsers } from "../../redux/slices/userSlice";
 
 import styles from "./Cart.module.scss";
+import CartItem from "./CartItem";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -25,11 +26,14 @@ const Cart = () => {
     dispatch(fetchUsers());
     dispatch(fetchCart(id));
     dispatch(fetchOrders({ user: id }));
-  }, dispatch);
+  }, [dispatch]);
 
-  const cart = useSelector((state) => state.cart.cart);
+  const cart = useSelector((state) => state.cart?.cart);
   const orders = useSelector((state) => state.orders.orders);
 
+  const [totalPrice, setTotalPrice] = React.useState(cart?.totalPrice);
+
+  console.log(cart);
   if (!cart) {
     return "Loading...";
   }
@@ -48,13 +52,13 @@ const Cart = () => {
   };
 
   const handleItemPlus = (itemId, price) => {
-    dispatch(itemPlus({ id, itemId, price }));
+    // dispatch(itemPlus({ id, itemId, price }));
   };
 
   const handleItemMinus = (itemId, price, count) => {
-    if (count > 1) {
-      dispatch(itemMinus({ id, itemId, price }));
-    }
+    // if (count > 1) {
+    //   dispatch(itemMinus({ id, itemId, price }));
+    // }
   };
 
   const handleDisabledCheckoutButton = () => {
@@ -81,12 +85,12 @@ const Cart = () => {
     dispatch(
       addOrder({
         user: id,
-        number: orders.length,
+        number: orders.length + 1,
         items: items,
         date,
         address,
         phone,
-        totalPrice: cart.totalPrice,
+        totalPrice: totalPrice,
       })
     );
     dispatch(clearCart(id));
@@ -94,10 +98,11 @@ const Cart = () => {
     setPhone("");
   };
 
-  const handleNeedDelivey = () => {
+  const handleNeedDelivery = () => {
     setNeedDelivey(!needDelivey);
     setAddress("");
   };
+
   return (
     <div className={styles.cart}>
       <div className={styles.cart_wrapper}>
@@ -111,58 +116,22 @@ const Cart = () => {
         </div>
         {items.length ? (
           <div className={styles.cart_items}>
-            {items.map((item, index) => {
-              return (
-                <div className={styles.cart_item} key={index}>
-                  <div className={styles.itemImg}>
-                    <img
-                      width={80}
-                      height={80}
-                      src={`http://localhost:4000/${item.item.image}`}
-                      alt=""
-                    />
-                  </div>
-                  <div className={styles.itemName}>{item.item.name}</div>
-                  <div className={styles.item_counter}>
-                    <div className={styles.item_plus} id={styles.item_action}>
-                      <button
-                        onClick={() =>
-                          handleItemMinus(item._id, item.item.price, item.count)
-                        }
-                      >
-                        -
-                      </button>
-                    </div>
-                    <div className={styles.itemCount}>{item.count}шт</div>
-                    <div className={styles.item_minus} id={styles.item_action}>
-                      <button
-                        onClick={() =>
-                          handleItemPlus(item._id, item.item.price)
-                        }
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-                  <div className={styles.itemPrice}>{item.item.price}₽</div>
-                  <div className={styles.itemPrice}>
-                    {item.item.price * item.count}₽
-                  </div>
-                  <div className={styles.itemDelete}>
-                    <button
-                      onClick={() => handleDeleteItemFromBasket(item._id)}
-                    >
-                      x
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
+            {items.map((item, index) => (
+              <CartItem
+                item={item}
+                index={index}
+                handleDeleteItemFromBasket={handleDeleteItemFromBasket}
+                handleItemPlus={handleItemPlus}
+                handleItemMinus={handleItemMinus}
+                setTotalPrice={setTotalPrice}
+                totalPrice={totalPrice}
+              />
+            ))}
           </div>
         ) : (
           <div className={styles.cartEmptyText}>Корзина пуста</div>
         )}
-        <div className={styles.totalPrice}>Итого: {cart.totalPrice}₽</div>
+        <div className={styles.totalPrice}>Итого: {totalPrice}₽</div>
         <div className={styles.cart_checkoutItems}>
           <button
             onClick={handleCheckoutOrder}
@@ -187,7 +156,7 @@ const Cart = () => {
             <>
               <div
                 className={styles.needDeliveyText}
-                onClick={handleNeedDelivey}
+                onClick={handleNeedDelivery}
               >
                 Мне не нужна доставка
               </div>

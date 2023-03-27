@@ -19,7 +19,7 @@
         content: "";
         position: absolute;
         border: 10px solid transparent;
-        right: -20px;
+        right: -22px;
         border-left-color: black;
       }
     }
@@ -55,6 +55,7 @@
 }
 .divCointener {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
 }
 .divCointenerCard {

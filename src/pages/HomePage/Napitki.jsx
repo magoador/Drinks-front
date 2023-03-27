@@ -3,9 +3,9 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProduct } from "../../redux/slices/productSlice";
 import { fetchUsers } from "../../redux/slices/userSlice";
-import { addProductToCart, fetchCart } from "../../redux/slices/cartSlice";
+import { fetchCart } from "../../redux/slices/cartSlice";
 
-function Napitki() {
+function Napitki({ handleAddProductToCart }) {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
   const loggedUser = useSelector((state) => state.users.loggedUser?.id);
@@ -20,10 +20,6 @@ function Napitki() {
   if (!products) {
     return "Error";
   }
-
-  const handleAddProductToCart = (item) => {
-    dispatch(addProductToCart({ item, id: userCart?._id }));
-  };
 
   return (
     <div>
@@ -51,7 +47,7 @@ function Napitki() {
                     ) ? (
                       <button>В корзине</button>
                     ) : (
-                      <button onClick={() => handleAddProductToCart(item._id)}>
+                      <button onClick={() => handleAddProductToCart(item._id, item.price)}>
                         Добавить в корзину
                       </button>
                     )}

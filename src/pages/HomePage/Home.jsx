@@ -14,6 +14,7 @@ function Home() {
   const products = useSelector((state) => state.products.products);
   const loggedUser = useSelector((state) => state.users.loggedUser?.id);
   const userCart = useSelector((state) => state.cart.cart);
+  const [totalPrice, setTotalPrice] = React.useState(0);
 
   useEffect(() => {
     dispatch(fetchProduct());
@@ -25,13 +26,15 @@ function Home() {
     return "Error";
   }
 
-  const handleAddProductToCart = (item) => {
+  const handleAddProductToCart = (item, price) => {
+    setTotalPrice(totalPrice + price);
+    console.log(totalPrice);
     dispatch(addProductToCart({ item, id: userCart?._id }));
   };
 
   return (
     <div className={styles.home}>
-      {userCart?.items.length && (
+      {userCart?.items?.length && (
         <Link to={`/cart/${loggedUser}`}>
           <div className={styles.cart_link}>
             <div className={styles.cart_totalPrice}>
@@ -72,7 +75,11 @@ function Home() {
                     ) ? (
                       <button>В корзине</button>
                     ) : (
-                      <button onClick={() => handleAddProductToCart(item._id)}>
+                      <button
+                        onClick={() =>
+                          handleAddProductToCart(item._id, item.price)
+                        }
+                      >
                         Добавить в корзину
                       </button>
                     )}
@@ -120,7 +127,7 @@ function Home() {
           })}
         </div>
       </div>
-      <Napitki />
+      <Napitki handleAddProductToCart={handleAddProductToCart} />
     </div>
   );
 }
