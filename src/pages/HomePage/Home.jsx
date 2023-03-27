@@ -34,7 +34,7 @@ function Home() {
 
   return (
     <div className={styles.home}>
-      {userCart?.items?.length && (
+      {userCart?.items?.length > 0 && (
         <Link to={`/cart/${loggedUser}`}>
           <div className={styles.cart_link}>
             <div className={styles.cart_totalPrice}>

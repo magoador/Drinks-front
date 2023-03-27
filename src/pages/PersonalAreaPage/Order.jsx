@@ -1,28 +1,18 @@
 import React from "react";
 
 import styles from "./PersonalArea.module.scss";
-import order_moreInfo from "../../assets/img/order_moreInfo.png";
-import order_lessInfo from "../../assets/img/order_lessInfo.png";
 
-const Order = ({ id, phone, number, date, address, totalPrice, items }) => {
-  const [needMoreInfo, setNeedMoreInfo] = React.useState(false);
+const Order = ({ id, phone, number, date, address, totalPrice, status }) => {
   return (
-    <div className={styles.order} id={styles.pending} key={id}>
-      {needMoreInfo ? (
-        <div
-          className={styles.order_moreInfoButton}
-          onClick={() => setNeedMoreInfo(false)}
-        >
-          <img width={25} src={order_lessInfo} alt="" />
-        </div>
-      ) : (
-        <div
-          className={styles.order_moreInfoButton}
-          onClick={() => setNeedMoreInfo(true)}
-        >
-          <img width={25} src={order_moreInfo} alt="" />
-        </div>
-      )}
+    <div
+      className={styles.order}
+      id={
+        (status === "rejected" && styles.rejected) ||
+        (status === "success" && styles.success) ||
+        (status === "pending" && styles.pending)
+      }
+      key={id}
+    >
       <div className={styles.orderNumberAndDate_row}>
         <div className={styles.orderNumber}>Заказ № {number}</div>
         <div className={styles.orderDate}>от {date}</div>
@@ -48,20 +38,17 @@ const Order = ({ id, phone, number, date, address, totalPrice, items }) => {
         </div>
         <div className={styles.order_status}>
           <div className={styles.orderInfo_bText}>Статус заказа</div>
-          <div className={styles.status_text}>Готовится</div>
+          <div className={styles.status_text}>
+            {(status === "rejected" && "Отменен") ||
+              (status === "success" && "Доставлен") ||
+              (status === "pending" && "Готовится")}
+          </div>
         </div>
         <div className={styles.order_totalPrice}>
           <div className={styles.orderInfo_bText}>Итого к оплате</div>
           <div className={styles.totalPrice_number}>{totalPrice}₽</div>
         </div>
       </div>
-      {needMoreInfo && (
-        <div className={styles.order_moreInfo}>
-          {items.map((item) => {
-            return <div className={styles.f}>{item.item.name}</div>;
-          })}
-        </div>
-      )}
     </div>
   );
 };

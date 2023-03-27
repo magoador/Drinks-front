@@ -19,8 +19,11 @@ const Cart = () => {
   const [needDelivey, setNeedDelivey] = React.useState(false);
   const [address, setAddress] = React.useState("");
   const [phone, setPhone] = React.useState("");
+  const [totalPrice, setTotalPrice] = React.useState(0);
 
   const { id } = useParams();
+  const orders = useSelector((state) => state.orders.orders);
+  const cart = useSelector((state) => state.cart?.cart);
 
   React.useEffect(() => {
     dispatch(fetchUsers());
@@ -28,12 +31,11 @@ const Cart = () => {
     dispatch(fetchOrders({ user: id }));
   }, [dispatch]);
 
-  const cart = useSelector((state) => state.cart?.cart);
-  const orders = useSelector((state) => state.orders.orders);
+  React.useEffect(() => {
+    setTotalPrice(cart?.totalPrice)
+  }, [cart?.totalPrice])
 
-  const [totalPrice, setTotalPrice] = React.useState(cart?.totalPrice);
 
-  console.log(cart);
   if (!cart) {
     return "Loading...";
   }
@@ -49,16 +51,6 @@ const Cart = () => {
 
   const handleClearCart = () => {
     dispatch(clearCart(id));
-  };
-
-  const handleItemPlus = (itemId, price) => {
-    // dispatch(itemPlus({ id, itemId, price }));
-  };
-
-  const handleItemMinus = (itemId, price, count) => {
-    // if (count > 1) {
-    //   dispatch(itemMinus({ id, itemId, price }));
-    // }
   };
 
   const handleDisabledCheckoutButton = () => {
@@ -102,7 +94,6 @@ const Cart = () => {
     setNeedDelivey(!needDelivey);
     setAddress("");
   };
-
   return (
     <div className={styles.cart}>
       <div className={styles.cart_wrapper}>
@@ -121,8 +112,6 @@ const Cart = () => {
                 item={item}
                 index={index}
                 handleDeleteItemFromBasket={handleDeleteItemFromBasket}
-                handleItemPlus={handleItemPlus}
-                handleItemMinus={handleItemMinus}
                 setTotalPrice={setTotalPrice}
                 totalPrice={totalPrice}
               />

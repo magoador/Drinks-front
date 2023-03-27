@@ -27,7 +27,7 @@ const PersonalArea = () => {
           <div className={styles.OrdersForm}>
             <div className={styles.ordersForm_bText}>Мои заказы</div>
             <div className={styles.orders}>
-              {orders.map((order, index) => (
+              {orders.map((order) => (
                 <Order
                   key={order._id}
                   id={order._id}
@@ -37,14 +37,12 @@ const PersonalArea = () => {
                   address={order.address}
                   totalPrice={order.totalPrice}
                   items={order.items}
+                  status={order.status}
                 />
               ))}
             </div>
           </div>
           <div className={styles.changeInfoSideBar}>
-            <div className={styles.changeInfoSideBar_text} id="">
-              Мои данные
-            </div>
             <div className={styles.changeInfoSideBar_text} id={styles.active}>
               Мои заказы
             </div>
