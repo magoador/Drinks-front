@@ -35,7 +35,7 @@ const scroller = (px) => {
               {menu && <div className={styles.divMenu}>
               <h3 className={styles.textMenu} onClick={() => scroller(0)}>Бургеры</h3>
               <h3 className={styles.textMenu} onClick={() => scroller(1900)}>Напитки</h3>
-              <h3 className={styles.textMenu} onClick={() => scroller(4340)}>Картофельи Курица</h3>
+              <h3 className={styles.textMenu} onClick={() => scroller(4340)}>Картофель и Курица</h3>
               <h3 className={styles.textMenu} onClick={() => scroller(5150)}>Соусы</h3>
               </div>}
           </div>
